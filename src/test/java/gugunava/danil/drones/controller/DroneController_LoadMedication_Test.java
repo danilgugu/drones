@@ -109,7 +109,7 @@ public class DroneController_LoadMedication_Test extends AbstractDroneController
                         .file(image)
                         .file(commandAsBytes))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.message", is("Current drone is in status 'DELIVERING'. Please use another drone.")))
+                .andExpect(jsonPath("$.message", is("Current drone is in state 'DELIVERING'. Please use another drone.")))
                 .andExpect(jsonPath("$.timestamp", notNullValue()));
 
         verify(droneRepository).findBySerialNumber(droneEntity.getSerialNumber());
