@@ -1,0 +1,17 @@
+POST http://localhost:8080/drones/1/medications
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="command"
+Content-Type: application/json
+
+{
+  "name": "medication_1",
+  "weight": 3,
+  "code": "HC_500"
+}
+--WebAppBoundary
+Content-Disposition: form-data; name="image"; filename="medication_1.png"
+
+< ../../src/test/resources/image/medication_1.png
+--WebAppBoundary--
