@@ -12,4 +12,6 @@ public interface DroneRepository extends JpaRepository<DroneEntity, Long>, Custo
     Optional<DroneEntity> findBySerialNumber(String serialNumber);
 
     List<DroneEntity> findAllByBatteryCapacityGreaterThanEqualAndStateIn(int batteryCapacity, List<DroneState> states);
+
+    boolean existsBySerialNumber(String serialNumber);
 }

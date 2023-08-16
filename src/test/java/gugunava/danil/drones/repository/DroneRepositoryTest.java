@@ -60,4 +60,11 @@ public class DroneRepositoryTest {
 		assertEquals(countBeforeAdding, countAfterAdding - 1);
 		assertTrue(droneRepository.existsById(saved.getId()));
 	}
+
+	@Sql(scripts = "/sql/drone/insert_one.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+	@Sql(scripts = "/sql/drone/delete_one.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+	void checkExistsBySerialNumber() {
+		assertTrue(droneRepository.existsBySerialNumber("1"));
+		assertFalse(droneRepository.existsBySerialNumber("2"));
+	}
 }

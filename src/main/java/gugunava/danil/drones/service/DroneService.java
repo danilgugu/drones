@@ -34,6 +34,9 @@ public class DroneService {
     private final ConversionService conversionService;
 
     public Drone register(RegisterDroneCommand command) {
+        if (droneRepository.existsBySerialNumber(command.getSerialNumber())) {
+            throw DroneAlreadyExistsException.withSerialNumber(command.getSerialNumber());
+        }
         DroneEntity droneEntity = DroneEntity.createNew(command.getSerialNumber(), command.getModel(), command.getWeightLimit(), INITIAL_BATTERY_CAPACITY, INITIAL_DRONE_STATE);
         DroneEntity saved = droneRepository.save(droneEntity);
         return conversionService.convert(saved, Drone.class);

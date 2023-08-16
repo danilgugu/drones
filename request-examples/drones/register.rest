@@ -4,5 +4,5 @@ Content-Type: application/json
 {
   "serialNumber": "1000",
   "model": "Heavyweight",
-  "weightLimit": -500
+  "weightLimit": 500
 }

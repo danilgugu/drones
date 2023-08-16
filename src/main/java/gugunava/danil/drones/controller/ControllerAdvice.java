@@ -27,6 +27,13 @@ public class ControllerAdvice {
         return new ErrorDto(e.getMessage());
     }
 
+    @ExceptionHandler(DroneAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    protected ErrorDto handle(DroneAlreadyExistsException e) {
+        log.error("{}: {}", e.getClass().getSimpleName(), e.getMessage(), e);
+        return new ErrorDto(e.getMessage());
+    }
+
     @ExceptionHandler(DroneBatteryIsLowException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected ErrorDto handle(DroneBatteryIsLowException e) {
