@@ -5,17 +5,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "drone")
+@SequenceGenerator(name = "drone_gen", sequenceName = "drone_id_seq")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class DroneEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "drone_gen")
     private Long id;
 
     private String serialNumber;

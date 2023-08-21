@@ -1,3 +1,8 @@
+--liquibase formatted sql
+--changeset danilgugu:5
+
+set search_path to drones_schema;
+
 insert into drone (serial_number, model, weight_limit, battery_capacity, state)
 values ('1', 'Cruiserweight', 300, 100, 'IDLE'),
        ('2', 'Middleweight', 200, 100, 'IDLE'),

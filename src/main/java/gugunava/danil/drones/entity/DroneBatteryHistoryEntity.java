@@ -5,17 +5,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.Instant;
 
 @Entity
 @Table(name = "drone_battery_history")
+@SequenceGenerator(name = "drone_battery_history_gen", sequenceName = "drone_battery_history_id_seq")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class DroneBatteryHistoryEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "drone_battery_history_gen")
     private Long id;
 
     private Long droneId;

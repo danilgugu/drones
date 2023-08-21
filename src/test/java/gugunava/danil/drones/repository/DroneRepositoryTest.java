@@ -19,10 +19,10 @@ public class DroneRepositoryTest {
 	private DroneRepository droneRepository;
 
 	@Test
-	@Sql(scripts = "/sql/drone/insert_one.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Sql(scripts = "/sql/drone/insert_one.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 	void whenDeleteExistingEntity_thenDbShouldContainOneLessEntity() {
-		long countBeforeDeletion = droneRepository.count();
-		long droneId = 1L;
+        long countBeforeDeletion = droneRepository.count();
+        long droneId = -1L;
 		assertTrue(droneRepository.existsById(droneId));
 
 		droneRepository.deleteById(droneId);
@@ -51,8 +51,8 @@ public class DroneRepositoryTest {
 	@Test
 	@Sql(scripts = "/sql/drone/delete_one.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 	void whenAddNewEntity_dbShouldContainOneMoreEntity() {
-		long countBeforeAdding = droneRepository.count();
-		DroneEntity droneEntity = new DroneEntity(null, "test_serial", "new", 145, 80, DroneState.IDLE);
+        long countBeforeAdding = droneRepository.count();
+        DroneEntity droneEntity = new DroneEntity(null, "-1", "new", 145, 80, DroneState.IDLE);
 
 		DroneEntity saved = droneRepository.save(droneEntity);
 
@@ -61,10 +61,9 @@ public class DroneRepositoryTest {
 		assertTrue(droneRepository.existsById(saved.getId()));
 	}
 
-	@Sql(scripts = "/sql/drone/insert_one.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-	@Sql(scripts = "/sql/drone/delete_one.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Test
 	void checkExistsBySerialNumber() {
-		assertTrue(droneRepository.existsBySerialNumber("1"));
-		assertFalse(droneRepository.existsBySerialNumber("2"));
+        assertTrue(droneRepository.existsBySerialNumber("1"));
+        assertFalse(droneRepository.existsBySerialNumber("-1"));
 	}
 }

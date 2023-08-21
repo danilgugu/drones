@@ -76,8 +76,8 @@ public class DroneMedicationRepositoryTest {
 		ThrowableAssert.ThrowingCallable save = () -> droneMedicationRepository.save(droneMedicationEntity);
 
 		thenThrownBy(save)
-				.isInstanceOf(DataIntegrityViolationException.class)
-				.hasMessage("could not execute statement; SQL [n/a]; constraint [CONSTRAINT_FA3]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement");
+                .isInstanceOf(DataIntegrityViolationException.class)
+                .hasMessage("could not execute statement; SQL [n/a]; constraint [drone_medication_medication_id_fkey]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement");
 		long countAfterAdding = droneMedicationRepository.count();
 		assertEquals(countBeforeAdding, countAfterAdding);
 		assertFalse(droneMedicationRepository.existsById(droneMedicationEntity));
